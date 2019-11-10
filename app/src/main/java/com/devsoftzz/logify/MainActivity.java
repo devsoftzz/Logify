@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mStorage;
     private String USERNAME,PASSWORD;
     private String URL = "https://10.100.56.55:8090/";
+    private boolean second = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         PASSWORD = mStorage.getString("password","");
 
         loadSite();
+
     }
 
     private void loadSite() {
@@ -64,20 +66,28 @@ public class MainActivity extends AppCompatActivity {
                 view.loadUrl(url);
                 return true;
             }
-
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
 
-                final String js = "javascript:" +
-                        "document.getElementById('password').value = '" + PASSWORD + "';"  +
-                        "document.getElementById('username').value = '" + USERNAME + "';";
+                    String js="";
 
-                view.evaluateJavascript(js, new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String s) {
-
+                    if(!second){
+                         js += "javascript:" +
+                                "document.getElementById('password').value = '" + PASSWORD + "';"  +
+                                "document.getElementById('username').value = '" + USERNAME + "';"  +
+                                "document.getElementById('loginbutton').click()";
+                        second=true;
+                    }else {
+                        js += "javascript:" +
+                                "document.getElementById('password').value = '" + PASSWORD + "';"  +
+                                "document.getElementById('username').value = '" + USERNAME + "';";
                     }
-                });
+
+                    view.evaluateJavascript(js, new ValueCallback<String>() {
+                        @Override
+                        public void onReceiveValue(String s) {
+                        }
+                    });
             }
 
             @Override
@@ -85,26 +95,17 @@ public class MainActivity extends AppCompatActivity {
                 handler.proceed();
             }
         });
-        mWebView.setWebChromeClient(new WebChromeClient() {
-            public void onProgressChanged(WebView view, int progress) {
-//                if (progress < 100) {
-//                    progressDialog.show();
-//                }
-//                if (progress = = 100) {
-//                    progressDialog.dismiss();
-//                }
-            }
-        });
-
     }
-
     private void generateUSER() {
+
         TypeFaces typeFaces = new TypeFaces();
         char[][] values = typeFaces.getData();
         int token=0;
         String TempUSER = "";
         String RANDOM = String.valueOf(new Random().nextInt(900000000) + 100000000);
+
         //Toast.makeText(getApplicationContext(),String.valueOf(values.length),Toast.LENGTH_LONG).show();
+
         for (int i=0;i<USERNAME.length();i++){
             token = (int) RANDOM.charAt(i)%values.length;
             switch (USERNAME.charAt(i)){
@@ -146,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         }
         USERNAME = TempUSER;
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.side_menu, menu);
@@ -170,29 +170,27 @@ public class MainActivity extends AppCompatActivity {
                 wp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         if(isWPInstalled()){
-
                             Uri mUri = Uri.parse("smsto:+919824978996");
                             Intent mIntent = new Intent(Intent.ACTION_SENDTO, mUri);
                             mIntent.setPackage("com.whatsapp");
                             mIntent.putExtra("chat",true);
                             startActivity(mIntent);
                             dialog.dismiss();
-
                         }else {
                             Toast.makeText(getApplicationContext(),"WhatsApp isn't Installed.",Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
                         }
                     }
                 });
-
                 github.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "http://www.example.com";
+                        String url = "https://github.com/devsoftzz/Logify";
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(url));
                         startActivity(intent);
+                        dialog.dismiss();
                     }
                 });
 
