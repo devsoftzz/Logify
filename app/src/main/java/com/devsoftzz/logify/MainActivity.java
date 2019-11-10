@@ -16,6 +16,8 @@ import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -82,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                                 "document.getElementById('password').value = '" + PASSWORD + "';"  +
                                 "document.getElementById('username').value = '" + USERNAME + "';";
                     }
-
                     view.evaluateJavascript(js, new ValueCallback<String>() {
                         @Override
                         public void onReceiveValue(String s) {
@@ -94,14 +95,18 @@ public class MainActivity extends AppCompatActivity {
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 handler.proceed();
             }
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
+                Toast.makeText(getApplicationContext(), "Something Want Wrong", Toast.LENGTH_LONG).show();
+            }
         });
     }
     private void generateUSER() {
 
         TypeFaces typeFaces = new TypeFaces();
         char[][] values = typeFaces.getData();
-        int token=0;
-        String TempUSER = "";
+        int token;
+        StringBuilder TempUSER = new StringBuilder();
         String RANDOM = String.valueOf(new Random().nextInt(900000000) + 100000000);
 
         //Toast.makeText(getApplicationContext(),String.valueOf(values.length),Toast.LENGTH_LONG).show();
@@ -110,42 +115,42 @@ public class MainActivity extends AppCompatActivity {
             token = (int) RANDOM.charAt(i)%values.length;
             switch (USERNAME.charAt(i)){
                 case '0':
-                    TempUSER += values[token][0];
+                    TempUSER.append(values[token][0]);
                     break;
                 case '1':
-                    TempUSER += values[token][1];
+                    TempUSER.append(values[token][1]);
                     break;
                 case '2':
-                    TempUSER += values[token][2];
+                    TempUSER.append(values[token][2]);
                     break;
                 case '3':
-                    TempUSER += values[token][3];
+                    TempUSER.append(values[token][3]);
                     break;
                 case '4':
-                    TempUSER += values[token][4];
+                    TempUSER.append(values[token][4]);
                     break;
                 case '5':
-                    TempUSER += values[token][5];
+                    TempUSER.append(values[token][5]);
                     break;
                 case '6':
-                    TempUSER += values[token][6];
+                    TempUSER.append(values[token][6]);
                     break;
                 case '7':
-                    TempUSER += values[token][7];
+                    TempUSER.append(values[token][7]);
                     break;
                 case '8':
-                    TempUSER += values[token][8];
+                    TempUSER.append(values[token][8]);
                     break;
                 case '9':
-                    TempUSER += values[token][9];
+                    TempUSER.append(values[token][9]);
                     break;
 
                     default:
-                        TempUSER += USERNAME.charAt(i);
+                        TempUSER.append(USERNAME.charAt(i));
 
             }
         }
-        USERNAME = TempUSER;
+        USERNAME = TempUSER.toString();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
