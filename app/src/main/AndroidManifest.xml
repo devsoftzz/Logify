@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.devsoftzz.logify">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.UPDATE_DEVICE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logify"

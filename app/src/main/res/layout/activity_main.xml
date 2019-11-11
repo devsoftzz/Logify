@@ -5,17 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#58BCFF">
-    <androidx.cardview.widget.CardView
+    android:background="@color/colorPrimary">
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="16dp">
+        android:layout_height="match_parent">
         <WebView
             android:id="@+id/webview"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/rotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8">
+            <ImageView
+                android:id="@+id/refresh"
+                android:layout_width="124dp"
+                android:layout_height="124dp"
+                android:src="@drawable/refresh"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="86dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:id="@+id/no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="256dp"
+                    android:layout_height="256dp"
+                    android:src="@drawable/no"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Disconnected :("
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/yes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="invisible">
+                <ImageView
+                    android:layout_width="256dp"
+                    android:layout_height="256dp"
+                    android:src="@drawable/yes"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Connected :)"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
