@@ -1,4 +1,4 @@
-package com.devsoftzz.logify;
+package com.devsoftzz.logiify;
 
 import androidx.appcompat.app.AppCompatActivity;
 

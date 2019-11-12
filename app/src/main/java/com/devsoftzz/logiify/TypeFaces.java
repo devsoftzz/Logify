@@ -1,4 +1,4 @@
-package com.devsoftzz.logify;
+package com.devsoftzz.logiify;
 
 public class TypeFaces {
     char[][] data = new char [3][10];

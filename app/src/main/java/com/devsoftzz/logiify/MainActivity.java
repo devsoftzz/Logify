@@ -1,7 +1,6 @@
-package com.devsoftzz.logify;
+package com.devsoftzz.logiify;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.net.http.SslError;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,13 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.RotateAnimation;
 import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -149,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                     js += "document.getElementById('loginbutton').click()";
                     second=true;
                 }
-
                 view.evaluateJavascript(js, new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String s) {
@@ -166,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                                 mRotate.clearAnimation();
                             }
                         },1500);
-
                     }
                 });
             }
@@ -284,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void webURL() {
 
-        String url = "https://github.com/devsoftzz/Logify";
+        String url = "https://github.com/devsoftzz/Logify_";
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
